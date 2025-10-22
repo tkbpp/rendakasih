@@ -229,7 +229,9 @@ p {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     max-width: 250px;
-    margin-left: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
 }
 
 /* Hover Effect: Guru box lift */
@@ -812,5 +814,6 @@ footer {
     .map-container {
         grid-column: 1 / 2;
     }
+
 
 }
