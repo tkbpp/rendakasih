@@ -145,24 +145,51 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
- // --- Mobile hamburger toggle ---
+   // --- Mobile hamburger toggle ---
     const navToggle = document.getElementById('nav-toggle');
     const navLinks = document.querySelector('.nav-links');
+
+    function toggleMenu(show) {
+        if (navToggle && navLinks) {
+            navToggle.setAttribute('aria-expanded', String(show));
+            navLinks.classList.toggle('show', show);
+            // Prevent scroll when menu is open
+            document.body.style.overflow = show ? 'hidden' : '';
+        }
+    }
+
     if (navToggle && navLinks) {
-        navToggle.addEventListener('click', function () {
-            const expanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', String(!expanded));
-            navLinks.classList.toggle('show');
+        // Toggle menu on button click
+        navToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            const willShow = this.getAttribute('aria-expanded') !== 'true';
+            toggleMenu(willShow);
         });
 
-        // Close menu when a link is clicked (mobile)
+        // Close menu when clicking outside
+        document.addEventListener('click', function (e) {
+            if (navLinks.classList.contains('show') &&
+                !navLinks.contains(e.target) &&
+                !navToggle.contains(e.target)) {
+                toggleMenu(false);
+            }
+        });
+
+        // Close menu when a link is clicked
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', function () {
-                if (navLinks.classList.contains('show')) {
-                    navLinks.classList.remove('show');
-                    navToggle.setAttribute('aria-expanded', 'false');
-                }
+                toggleMenu(false);
             });
         });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && navLinks.classList.contains('show')) {
+                toggleMenu(false);
+            }
+        });
+    }
+});
+
 
 
