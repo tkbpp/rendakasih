@@ -142,4 +142,27 @@ document.addEventListener('DOMContentLoaded', function () {
             showVideoModal(videoId);
         });
     });
+
+});
+
+ // --- Mobile hamburger toggle ---
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', function () {
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', String(!expanded));
+            navLinks.classList.toggle('show');
+        });
+
+        // Close menu when a link is clicked (mobile)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function () {
+                if (navLinks.classList.contains('show')) {
+                    navLinks.classList.remove('show');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    }
 });
