@@ -113,6 +113,40 @@ p {
     /* Ensure text color remains white */
 }
 
+/* ==========================================================================
+   Navigation Bar
+   ========================================================================== */
+.navbar {
+    background-color: #8340cf96;
+    /* Light pink/red theme for warmth */
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: #1a0be6;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Hover Effect: Nav link background and text color change */
+.nav-links a:hover {
+    color: white;
+    background-color: #369c21;
+    /* Match heading color */
+}
+
 /* Navbar: responsive hamburger */
 .nav-container {
     display: flex;
@@ -173,40 +207,6 @@ p {
         width: 100%;
         text-align: center;
     }
-}
-
-/* ==========================================================================
-   Navigation Bar
-   ========================================================================== */
-.navbar {
-    background-color: #8340cf96;
-    /* Light pink/red theme for warmth */
-    padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.nav-links {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-}
-
-.nav-links a {
-    color: #1a0be6;
-    font-weight: bold;
-    font-size: 1.1em;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-/* Hover Effect: Nav link background and text color change */
-.nav-links a:hover {
-    color: white;
-    background-color: #369c21;
-    /* Match heading color */
 }
 
 /* ==========================================================================
@@ -879,4 +879,5 @@ footer {
 
 
 }
+
 
