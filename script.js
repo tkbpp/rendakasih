@@ -143,8 +143,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-});
-
    // --- Mobile hamburger toggle ---
     const navToggle = document.getElementById('nav-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -190,6 +188,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-
-
-
