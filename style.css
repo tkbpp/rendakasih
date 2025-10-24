@@ -1,8 +1,3 @@
-/*
- * style.css
- * CSS untuk TK BPP RENDAKASIH
- */
-
 /* ==========================================================================
    Global Reset & Utilities
    ========================================================================== */
@@ -49,10 +44,6 @@ ul {
 
 .section-padding {
     padding: 60px 0;
-}
-
-.bg-light {
-    background-color: #e9ecef;
 }
 
 h2 {
@@ -293,7 +284,7 @@ p {
    Visi & Misi Section
    ========================================================================== */
 #visi-misi p {
-    text-align: center;
+    text-align: left;
     margin-bottom: 15px;
 }
 
@@ -340,12 +331,6 @@ p {
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
-}
-
-/* Hover Effect: Guru box lift */
-.guru-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .guru-box img {
@@ -523,18 +508,13 @@ p {
 
 .galeri-modal-close {
     position: absolute;
-    top: 15px;
-    right: 35px;
+    top: 5px;
+    right: 20px;
     color: #f1f1f1;
     font-size: 40px;
     font-weight: bold;
     transition: 0.3s;
     cursor: pointer;
-}
-
-.galeri-modal-close:hover,
-.galeri-modal-close:focus {
-    color: #bbb;
 }
 
 /* --- Modal Lightbox (Video) --- */
@@ -544,36 +524,41 @@ p {
     /* Hidden by default */
     position: fixed;
     z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .video-content,
 .pustaka-content {
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
     width: 100%;
-    max-width: 800px;
-    /* Adjust size as needed */
-    height: 800%;
-    max-height: 860px;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    /* 16:9 */
+    height: 0;
+}
+
+.video-wrapper iframe,
 .video-content iframe,
 .pustaka-content iframe {
-    display: block;
-    width: 90%;
-    height: 0;
-    padding-bottom: 56.25%;
-    /* 16:9 Aspect Ratio */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
 }
 
 .video-modal-close,
@@ -642,6 +627,7 @@ p {
     padding: 20px;
     background-color: #f9f9f9;
     animation: fadeIn 0.5s;
+    text-align: left;
 }
 
 /* --- Alumni Modal --- */
@@ -719,7 +705,7 @@ p {
 }
 
 .alumni-item {
-    text-align: center;
+    text-align: left;
     max-width: 300px;
 }
 
@@ -806,7 +792,7 @@ p {
 .kontak-item {
     background-color: white;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
@@ -817,7 +803,7 @@ p {
     border: 2px solid #e0e0e0;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(44, 62, 80, 0.07);
-    padding: 20px 18px;
+    padding: 20px 20px;
     margin-bottom: 10px;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
@@ -923,8 +909,4 @@ footer {
         grid-column: 1 / 2;
     }
 
-
 }
-
-
-
