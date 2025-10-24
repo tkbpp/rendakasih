@@ -73,19 +73,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     photoItems.forEach(item => {
         item.addEventListener('click', function () {
+            if (!modal || !modalImg) return;
             modal.style.display = "block";
             modalImg.src = this.src;
+            document.body.style.overflow = 'hidden';
         });
     });
 
-    closeBtn.addEventListener('click', function () {
+    closeBtn && closeBtn.addEventListener('click', function () {
+        if (!modal) return;
         modal.style.display = "none";
+        document.body.style.overflow = '';
     });
 
     // Close modal if user clicks outside the image
     window.addEventListener('click', function (event) {
-        if (event.target === modal) {
+        if (modal && event.target === modal) {
             modal.style.display = "none";
+            document.body.style.overflow = '';
         }
     });
 
@@ -95,18 +100,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to create and show the video modal
     function showVideoModal(videoId) {
-        // Create the modal HTML structure with a responsive wrapper
+        if (!videoId) return;
+
+        // Create the modal HTML structure
         const modalHtml = `
-            <div id="video-modal" class="video-modal">
-                <span class="video-modal-close" id="video-modal-close">&times;</span>
+            <div id="video-modal" class="video-modal" aria-hidden="false">
+                <button class="video-modal-close" id="video-modal-close" aria-label="Tutup">&times;</button>
                 <div class="video-content">
-                    <div class="video-wrapper">
-                        <iframe id="youtube-iframe"
-                                src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1&origin=${window.location.origin}"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                    </div>
+                    <iframe id="youtube-iframe"
+                            src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                 </div>
             </div>
         `;
@@ -116,24 +121,32 @@ document.addEventListener('DOMContentLoaded', function () {
         const videoModal = document.getElementById('video-modal');
         const modalClose = document.getElementById('video-modal-close');
 
-        // Show modal as flex so CSS centers the content
+        if (!videoModal) return;
+
+        // show as flex-centered (CSS handles centering); prevent background scroll
         videoModal.style.display = 'flex';
-        // Prevent background scroll while modal is open
         document.body.style.overflow = 'hidden';
 
-        // Close functionality
-        modalClose.addEventListener('click', function () {
+        // Close functionality: remove modal and restore scroll
+        const removeModal = () => {
+            if (videoModal) videoModal.remove();
             document.body.style.overflow = '';
-            videoModal.remove();
-        });
+        };
 
-        // Close modal if user clicks outside the video
-        window.addEventListener('click', function (event) {
+        modalClose && modalClose.addEventListener('click', removeModal);
+
+        // Close modal if user clicks on backdrop (videoModal)
+        videoModal.addEventListener('click', function (event) {
             if (event.target === videoModal) {
-                document.body.style.overflow = '';
-                videoModal.remove();
+                removeModal();
             }
         });
+
+        // Also handle Escape key while modal exists
+        function onKey(e) {
+            if (e.key === 'Escape') removeModal();
+        }
+        window.addEventListener('keydown', onKey, { once: true });
     }
 
     // Attach click listener to video posters
@@ -144,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // --- Mobile hamburger toggle ---
+   // --- Mobile hamburger toggle ---
     const navToggle = document.getElementById('nav-toggle');
     const navLinks = document.querySelector('.nav-links');
 
