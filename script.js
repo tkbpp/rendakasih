@@ -95,18 +95,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to create and show the video modal
     function showVideoModal(videoId) {
-        // Create the modal HTML structure
+        // Create the modal HTML structure with a responsive wrapper
         const modalHtml = `
             <div id="video-modal" class="video-modal">
                 <span class="video-modal-close" id="video-modal-close">&times;</span>
                 <div class="video-content">
-                    <iframe id="youtube-iframe"
-                            src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1&origin=${window.location.origin}"
-                            width="100%"
-                            height="100%"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+                    <div class="video-wrapper">
+                        <iframe id="youtube-iframe"
+                                src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1&origin=${window.location.origin}"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
                 </div>
             </div>
         `;
@@ -116,20 +116,21 @@ document.addEventListener('DOMContentLoaded', function () {
         const videoModal = document.getElementById('video-modal');
         const modalClose = document.getElementById('video-modal-close');
 
-        // Adjust iframe size using padding-bottom technique (CSS handles aspect ratio)
-        const iframe = document.getElementById('youtube-iframe');
-        iframe.style.height = '100%';
-
-        videoModal.style.display = 'block';
+        // Show modal as flex so CSS centers the content
+        videoModal.style.display = 'flex';
+        // Prevent background scroll while modal is open
+        document.body.style.overflow = 'hidden';
 
         // Close functionality
         modalClose.addEventListener('click', function () {
+            document.body.style.overflow = '';
             videoModal.remove();
         });
 
         // Close modal if user clicks outside the video
         window.addEventListener('click', function (event) {
             if (event.target === videoModal) {
+                document.body.style.overflow = '';
                 videoModal.remove();
             }
         });
@@ -143,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-   // --- Mobile hamburger toggle ---
+    // --- Mobile hamburger toggle ---
     const navToggle = document.getElementById('nav-toggle');
     const navLinks = document.querySelector('.nav-links');
 
